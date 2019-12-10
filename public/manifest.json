@@ -1,25 +1,21 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+  "manifest_version": 2,
+  "name": "JW Dash-Lite",
+  "author": "Daniel Lee",
+  "version": "1.0.0",
+  "description": "Access some JW Dashboard features through a Chrome extension.",
+  "icons": {
+    "16": "./preview_imgs/16.png",
+    "48": "./preview_imgs/48.png",
+    "128": "./preview_imgs/128.png"
+  },
+  "browser_action": {
+    "default_icon": {          
+      "16": "./preview_imgs/16.png", 
+      "24": "./preview_imgs/24.png", 
+      "32": "./preview_imgs/32.png"  
     },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }	    
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+    "default_title": "Dash-Lite",      
+    "default_popup": "index.html"       
+  }
 }

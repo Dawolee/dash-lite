@@ -5,9 +5,24 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-width: 350px;
+  min-height: 275px;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.row-buttons {
+  margin: 0 0.25% 0 0.25%;
+}
+
+.video_thumbnail {
+  max-width: 75px;
+  max-height: 50px;
+}
+
+.fetching-msg {
+  margin: 0% auto 0% auto;
 }
