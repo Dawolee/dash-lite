@@ -1,3 +1,7 @@
+## About
+
+This is a simple Chrome extension I built to make it easier to access my JW Dashboard library/player. This extension allows you to grab video media ids, grab single line embeds urls, hls streams, player ids, etc.
+
 ## How to install
 
 1. Clone or download the folder
