@@ -3,14 +3,15 @@ import { fetchVideos, SearchBar } from "./index"
 import Accordion from "react-bootstrap/Accordion"
 import Button from "react-bootstrap/Button"
 import VideoRow from "./VideoRow"
+import { apiKey, apiSecret } from "../secrets"
 
 export default class VideosList extends Component {
   constructor(props) {
     super(props)
     this.state = {
       //add a secret.js file and exempt it in the gitignore
-      apiKey: "dfWxR1Zi",
-      apiSecret: "GQu8ge5BUEWZIM5g9jVnyowx",
+      apiKey,
+      apiSecret,
       videos: [],
       limit: 10,
       offset: 0,

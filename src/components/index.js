@@ -76,7 +76,7 @@ export let fetchVideos = (
 }
 
 export let fetchPlayers = callback => {
-  let api_secret = "GQu8ge5BUEWZIM5g9jVnyowx"
+  let api_secret = apiSecret
   let requestString = apiCallHelper()
   let shaObj = new jsSHA("SHA-1", "TEXT")
 
