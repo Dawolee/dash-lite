@@ -9,7 +9,6 @@ export default class VideosList extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      //add a secret.js file and exempt it in the gitignore
       apiKey,
       apiSecret,
       videos: [],
