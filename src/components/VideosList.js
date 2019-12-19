@@ -38,7 +38,6 @@ export default class VideosList extends Component {
       preview: true,
       url: `https://cdn.jwplayer.com/videos/${id}-${this.state.key}.mp4`
     })
-    console.log(this.state.url)
   }
 
   searchResults = videos => {
