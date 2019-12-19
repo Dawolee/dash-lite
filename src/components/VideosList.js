@@ -14,8 +14,19 @@ export default class VideosList extends Component {
       limit: 10,
       offset: 0,
       view: "list",
-      loading: true
+      loading: true,
+      preview: false,
+      url: ""
     }
+  }
+
+  closePlayer = () => {
+    this.setState({ preview: false })
+  }
+
+  //should've used Redux for this as passing state around from VideoRow back up to VideosList is getting out of hand
+  handlePreview = url => {
+    this.setState({ preview: true, url })
   }
 
   searchResults = videos => {
@@ -37,9 +48,10 @@ export default class VideosList extends Component {
   }
 
   render() {
-    let { videos, view, loading } = this.state
+    let { videos, view, loading, preview, url } = this.state
     return (
       <div>
+        {preview && <Preview url={url} closePlayer={this.closePlayer} />}
         <SearchBar searchResults={this.searchResults} />
         {!loading && (
           <Accordion>
@@ -49,6 +61,7 @@ export default class VideosList extends Component {
                 eventKey={index}
                 title={video.title}
                 mediaID={video.key}
+                handlePreview={this.handlePreview}
               />
             ))}
           </Accordion>

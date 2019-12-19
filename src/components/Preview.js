@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import Button from "react-bootstrap/Button"
 
 export default class Preview extends Component {
   constructor(props) {
@@ -8,10 +9,12 @@ export default class Preview extends Component {
   componentDidMount() {}
 
   render() {
-    let { url } = this.props
+    let { url, closePlayer } = this.props
     return (
+      //using video tag so no analytics get sent(except for usage i guess)
       <div>
-        <video src={url}></video>
+        <video autoPlay controls src={url}></video>
+        <Button onClick={closePlayer}>Close Player</Button>
       </div>
     )
   }
