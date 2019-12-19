@@ -16,7 +16,7 @@ export default class VideoRow extends Component {
     let { handlePreview, mediaID } = this.props
 
     if (e.target.value === "play_preview") {
-      handlePreview(`https://cdn.jwplayer.com/videos/${mediaID}-cgKkUJxV.mp4`)
+      handlePreview(mediaID)
     } else {
       //annoying workaround to copy to clipboard
       let dummy = document.createElement("input")

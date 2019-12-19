@@ -1,5 +1,11 @@
 import React, { Component } from "react"
-import { fetchVideos, SearchBar, VideoRow, Preview } from "./index"
+import {
+  fetchVideos,
+  SearchBar,
+  VideoRow,
+  Preview,
+  fetchTemplateKey
+} from "./index"
 import Accordion from "react-bootstrap/Accordion"
 import Button from "react-bootstrap/Button"
 import { apiKey, apiSecret } from "../secrets"
@@ -16,31 +22,46 @@ export default class VideosList extends Component {
       view: "list",
       loading: true,
       preview: false,
-      url: ""
+      url: "",
+      key: ""
     }
   }
 
+  //helper function to close preview player
   closePlayer = () => {
     this.setState({ preview: false })
   }
 
   //should've used Redux for this as passing state around from VideoRow back up to VideosList is getting out of hand
-  handlePreview = url => {
-    this.setState({ preview: true, url })
+  handlePreview = id => {
+    this.setState({
+      preview: true,
+      url: `https://cdn.jwplayer.com/videos/${id}-${this.state.key}.mp4`
+    })
+    console.log(this.state.url)
   }
 
   searchResults = videos => {
     this.setState({ videos, view: "search" })
   }
 
+  //helper function to update video array for VideoRow
   updateVideos = videos => {
     this.setState({ videos: this.state.videos.concat(videos), loading: false })
   }
 
-  componentDidMount() {
-    fetchVideos(this.state.limit, 0, this.updateVideos)
+  //helper function to update template key for preview player
+  updateTemplateKey = key => {
+    this.setState({ key })
   }
 
+  //grab videos and template key when component is mounted
+  componentDidMount() {
+    fetchVideos(this.state.limit, 0, this.updateVideos)
+    fetchTemplateKey(this.updateTemplateKey)
+  }
+
+  //handling click of "More Videos" button
   handleClick = e => {
     this.setState({ offset: this.state.offset + 10 }, () => {
       fetchVideos(this.state.limit, this.state.offset, this.updateVideos)

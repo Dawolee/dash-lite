@@ -35,6 +35,45 @@ let apiCallHelper = () => {
   return call_string
 }
 
+//API call to fetch template key for video preview
+export let fetchTemplateKey = callback => {
+  let api_secret = apiSecret
+  let requestString = apiCallHelper()
+  let shaObj = new jsSHA("SHA-1", "TEXT")
+  shaObj.update(requestString + api_secret)
+  let api_signature = shaObj.getHash("HEX")
+
+  //need cors proxy to make request
+  let cors_anywhere = "https://cors-anywhere.herokuapp.com/"
+
+  requestString =
+    "https://api.jwplatform.com/v1/accounts/templates/list?" +
+    requestString +
+    "&api_signature=" +
+    api_signature
+
+  fetch(cors_anywhere + requestString, {
+    method: "GET",
+    mode: "cors",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(res => res.json())
+    .then(data => {
+      let templates = data["templates"]
+      //for loop to send back the 180p template key back up to VideosList for preview player URL
+      for (let i = 0; i < templates.length; i++) {
+        if (templates[i].name === "180p") {
+          callback(templates[i]["key"])
+          break
+        }
+      }
+    })
+    .catch(error => console.error("Error:", error))
+}
+
 export let fetchVideos = (
   limit = 10,
   offset = 0,
