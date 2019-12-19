@@ -1,8 +1,7 @@
 import React, { Component } from "react"
-import { fetchVideos, SearchBar } from "./index"
+import { fetchVideos, SearchBar, VideoRow, Preview } from "./index"
 import Accordion from "react-bootstrap/Accordion"
 import Button from "react-bootstrap/Button"
-import VideoRow from "./VideoRow"
 import { apiKey, apiSecret } from "../secrets"
 
 export default class VideosList extends Component {

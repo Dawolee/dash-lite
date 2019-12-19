@@ -10,8 +10,11 @@ function rand(digits) {
 
 export { default as OptionBar } from "./OptionBar"
 export { default as VideosList } from "./VideosList"
+export { default as VideoRow } from "./VideoRow"
 export { default as Players } from "./Players"
 export { default as SearchBar } from "./SearchBar"
+export { default as Preview } from "./Preview"
+export { default as PlayerRow } from "./PlayerRow"
 
 let apiCallHelper = () => {
   let api_format = "json"

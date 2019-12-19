@@ -1,7 +1,6 @@
 import React, { Component } from "react"
-import { fetchPlayers } from "./index"
+import { fetchPlayers, PlayerRow } from "./index"
 import Accordion from "react-bootstrap/Accordion"
-import PlayerRow from "./PlayerRow"
 
 export default class Players extends Component {
   constructor(props) {

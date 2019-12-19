@@ -5,16 +5,27 @@ import Button from "react-bootstrap/Button"
 import Image from "react-bootstrap/Image"
 
 export default class VideoRow extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      preview: false
+    }
+  }
+
   handleClick = e => {
-    //annoying workaround to copy to clipboard
-    let dummy = document.createElement("input")
-    document.body.appendChild(dummy)
-    dummy.setAttribute("value", e.target.value)
-    dummy.select()
-    document.execCommand("copy")
-    document.body.removeChild(dummy)
-    document.execCommand("copy")
-    this.handleToast(e.target.name)
+    if (e.target.value === "play_preview") {
+      alert("preview coming")
+    } else {
+      //annoying workaround to copy to clipboard
+      let dummy = document.createElement("input")
+      document.body.appendChild(dummy)
+      dummy.setAttribute("value", e.target.value)
+      dummy.select()
+      document.execCommand("copy")
+      document.body.removeChild(dummy)
+      document.execCommand("copy")
+      this.handleToast(e.target.name)
+    }
   }
 
   handleToast = e => {}
@@ -71,6 +82,15 @@ export default class VideoRow extends Component {
                 className="row-buttons"
               >
                 Single Line
+              </Button>
+              <Button
+                size="sm"
+                name="preview_video"
+                value="play_preview"
+                onClick={this.handleClick}
+                className="row-buttons"
+              >
+                Preview Video
               </Button>
             </Card.Body>
           </Accordion.Collapse>
