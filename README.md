@@ -6,7 +6,7 @@ This is a simple Chrome extension I built to make it easier to access my JW Dash
 
 1. Clone or download the folder
 2. Run **npm install** in the terminal
-3. Create a **secrets.js** file and put it inside the src file. The secrets.js file should look like:
+3. Create a **secrets.js** file and put it inside the "src" folder. The secrets.js file should look like:
 
    export let apiKey = "API_KEY"  
    export let apiSecret = "API_SECRET"
