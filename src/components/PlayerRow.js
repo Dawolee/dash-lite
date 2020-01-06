@@ -2,24 +2,34 @@ import React, { Component } from "react"
 import Card from "react-bootstrap/Card"
 import Accordion from "react-bootstrap/Accordion"
 import Button from "react-bootstrap/Button"
+import DropdownButton from "react-bootstrap/DropdownButton"
+import Dropdown from "react-bootstrap/Dropdown"
+import { displayToast } from "./index"
 
 export default class PlayerRow extends Component {
   handleClick = e => {
+    let { playerID } = this.props
+    let copyValue = ""
+
+    if (e === "playerid") {
+      copyValue = playerID
+    } else {
+      copyValue = `https://cdn.jwplayer.com/libraries/${playerID}.js`
+    }
+
     //annoying workaround to copy to clipboard
     let dummy = document.createElement("input")
     document.body.appendChild(dummy)
-    dummy.setAttribute("value", e.target.value)
+    dummy.setAttribute("value", copyValue)
     dummy.select()
     document.execCommand("copy")
     document.body.removeChild(dummy)
     document.execCommand("copy")
-    this.handleToast(e.target.name)
+    displayToast(e)
   }
 
-  handleToast = e => {}
-
   render() {
-    let { title, playerID, eventKey } = this.props
+    let { title, eventKey } = this.props
     return (
       <div>
         <Card>
@@ -30,24 +40,14 @@ export default class PlayerRow extends Component {
           </Card.Header>
           <Accordion.Collapse eventKey={eventKey}>
             <Card.Body>
-              <Button
-                size="sm"
-                name="playerID"
-                value={playerID}
-                onClick={this.handleClick}
-                className="row-buttons"
+              <DropdownButton
+                id="dropdown_player"
+                title="Select Option"
+                onSelect={this.handleClick}
               >
-                Player ID
-              </Button>
-              <Button
-                size="sm"
-                name="url"
-                value={`https://cdn.jwplayer.com/libraries/${playerID}.js`}
-                onClick={this.handleClick}
-                className="row-buttons"
-              >
-                Cloud Hosted URL
-              </Button>
+                <Dropdown.Item eventKey="playerid">Player ID</Dropdown.Item>
+                <Dropdown.Item eventKey="player_url">Player URL</Dropdown.Item>
+              </DropdownButton>
             </Card.Body>
           </Accordion.Collapse>
         </Card>

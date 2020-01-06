@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button"
 import Image from "react-bootstrap/Image"
 import DropdownButton from "react-bootstrap/DropdownButton"
 import Dropdown from "react-bootstrap/Dropdown"
+import { displayToast } from "./index"
 
 export default class VideoRow extends Component {
   constructor(props) {
@@ -16,7 +17,7 @@ export default class VideoRow extends Component {
   }
 
   handleClick = e => {
-    let { handlePreview, mediaID, handleToast } = this.props
+    let { handlePreview, mediaID } = this.props
     let copyValue = ""
 
     if (e === "play_preview") {
@@ -39,9 +40,7 @@ export default class VideoRow extends Component {
     document.execCommand("copy")
     document.body.removeChild(dummy)
     document.execCommand("copy")
-
-    //telling VideoList to show Toast
-    handleToast(e)
+    displayToast(e)
   }
 
   render() {
@@ -62,7 +61,7 @@ export default class VideoRow extends Component {
           <Accordion.Collapse eventKey={eventKey}>
             <Card.Body>
               <DropdownButton
-                id="dropdown"
+                id="dropdown_media"
                 title="Select Option"
                 onSelect={this.handleClick}
               >

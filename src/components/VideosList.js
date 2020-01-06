@@ -8,7 +8,6 @@ import {
 } from "./index"
 import Accordion from "react-bootstrap/Accordion"
 import Button from "react-bootstrap/Button"
-import Toast from "react-bootstrap/Toast"
 import { apiKey, apiSecret } from "../secrets"
 
 export default class VideosList extends Component {
@@ -24,8 +23,7 @@ export default class VideosList extends Component {
       loading: true,
       preview: false,
       url: "",
-      key: "",
-      showToast: false
+      key: ""
     }
   }
 
@@ -69,28 +67,10 @@ export default class VideosList extends Component {
     })
   }
 
-  //handle display of Toast
-  handleToast = e => {
-    this.setState({ showToast: true })
-  }
-
-  hideToast = () => {
-    this.setState({ showToast: false })
-  }
-
   render() {
-    let { videos, view, loading, preview, url, showToast } = this.state
+    let { videos, view, loading, preview, url } = this.state
     return (
       <div>
-        <Toast
-          animation={true}
-          onClose={this.hideToast}
-          show={showToast}
-          delay={3000}
-          autohide
-        >
-          <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
-        </Toast>
         {preview && <Preview url={url} closePlayer={this.closePlayer} />}
         <SearchBar searchResults={this.searchResults} />
         {!loading && (
@@ -102,7 +82,6 @@ export default class VideosList extends Component {
                 title={video.title}
                 mediaID={video.key}
                 handlePreview={this.handlePreview}
-                handleToast={this.handleToast}
               />
             ))}
           </Accordion>

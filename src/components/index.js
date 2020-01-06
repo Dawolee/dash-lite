@@ -1,5 +1,10 @@
 import jsSHA from "jssha"
 import { apiKey, apiSecret } from "../secrets"
+import "react-toastify/dist/ReactToastify.css"
+import { toast } from "react-toastify"
+
+//configuring toast library
+toast.configure()
 
 function rand(digits) {
   return Math.floor(
@@ -149,4 +154,9 @@ export let fetchPlayers = callback => {
       callback(data.players)
     })
     .catch(error => console.error("Error:", error))
+}
+
+//helper function to display Toast
+export let displayToast = e => {
+  toast(`${e} was copied!`)
 }
