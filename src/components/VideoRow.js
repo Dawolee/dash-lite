@@ -3,34 +3,46 @@ import Card from "react-bootstrap/Card"
 import Accordion from "react-bootstrap/Accordion"
 import Button from "react-bootstrap/Button"
 import Image from "react-bootstrap/Image"
+import DropdownButton from "react-bootstrap/DropdownButton"
+import Dropdown from "react-bootstrap/Dropdown"
 
 export default class VideoRow extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      preview: false
+      preview: false,
+      toast: ""
     }
   }
 
   handleClick = e => {
-    let { handlePreview, mediaID } = this.props
+    let { handlePreview, mediaID, handleToast } = this.props
+    let copyValue = ""
 
-    if (e.target.value === "play_preview") {
+    if (e === "play_preview") {
       handlePreview(mediaID)
-    } else {
-      //annoying workaround to copy to clipboard
-      let dummy = document.createElement("input")
-      document.body.appendChild(dummy)
-      dummy.setAttribute("value", e.target.value)
-      dummy.select()
-      document.execCommand("copy")
-      document.body.removeChild(dummy)
-      document.execCommand("copy")
-      this.handleToast(e.target.name)
+      return
+    } else if (e === "mediaid") {
+      copyValue = mediaID
+    } else if (e === "hls_stream") {
+      copyValue = `https://cdn.jwplayer.com/manifests/${mediaID}.m3u8`
+    } else if (e === "v2_media") {
+      copyValue = `https://cdn.jwplayer.com/v2/media/${mediaID}`
+    } else if (e === "single_line") {
+      copyValue = `https://cdn.jwplayer.com/players/${mediaID}-PLAYERID.js`
     }
-  }
+    //annoying workaround to copy to clipboard
+    let dummy = document.createElement("input")
+    document.body.appendChild(dummy)
+    dummy.setAttribute("value", copyValue)
+    dummy.select()
+    document.execCommand("copy")
+    document.body.removeChild(dummy)
+    document.execCommand("copy")
 
-  handleToast = e => {}
+    //telling VideoList to show Toast
+    handleToast(e)
+  }
 
   render() {
     let { title, mediaID, eventKey } = this.props
@@ -49,51 +61,23 @@ export default class VideoRow extends Component {
           </Card.Header>
           <Accordion.Collapse eventKey={eventKey}>
             <Card.Body>
-              <Button
-                size="sm"
-                name="mediaid"
-                value={mediaID}
-                onClick={this.handleClick}
-                className="row-buttons"
+              <DropdownButton
+                id="dropdown"
+                title="Select Option"
+                onSelect={this.handleClick}
               >
-                Media ID
-              </Button>
-              <Button
-                size="sm"
-                name="hls"
-                value={`https://cdn.jwplayer.com/manifests/${mediaID}.m3u8`}
-                onClick={this.handleClick}
-                className="row-buttons"
-              >
-                HLS
-              </Button>
-              <Button
-                size="sm"
-                name="playlist"
-                value={`https://cdn.jwplayer.com/v2/media/${mediaID}`}
-                onClick={this.handleClick}
-                className="row-buttons"
-              >
-                Media Playlist
-              </Button>
-              <Button
-                size="sm"
-                name="single_line"
-                value={`https://cdn.jwplayer.com/players/${mediaID}-PLAYERID.js`}
-                onClick={this.handleClick}
-                className="row-buttons"
-              >
-                Single Line
-              </Button>
-              <Button
-                size="sm"
-                name="preview_video"
-                value="play_preview"
-                onClick={this.handleClick}
-                className="row-buttons"
-              >
-                Preview Video
-              </Button>
+                <Dropdown.Item eventKey="mediaid">Media ID</Dropdown.Item>
+                <Dropdown.Item eventKey="hls_stream">HLS Stream</Dropdown.Item>
+                <Dropdown.Item eventKey="v2_media">
+                  V2 Media Playlist
+                </Dropdown.Item>
+                <Dropdown.Item eventKey="single_line">
+                  JS Single Line Embed
+                </Dropdown.Item>
+                <Dropdown.Item eventKey="play_preview">
+                  Preview Video
+                </Dropdown.Item>
+              </DropdownButton>
             </Card.Body>
           </Accordion.Collapse>
         </Card>
