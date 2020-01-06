@@ -9,6 +9,7 @@ import {
 import Accordion from "react-bootstrap/Accordion"
 import Button from "react-bootstrap/Button"
 import { apiKey, apiSecret } from "../secrets"
+import * as Scroll from "react-scroll"
 
 export default class VideosList extends Component {
   constructor(props) {
@@ -40,6 +41,7 @@ export default class VideosList extends Component {
       url: `https://cdn.jwplayer.com/videos/${id}-${this.state.key}.mp4`,
       preview_id: id
     })
+    Scroll.animateScroll.scrollToTop()
   }
 
   searchResults = videos => {
