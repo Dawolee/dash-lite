@@ -13,7 +13,7 @@ export default class Preview extends Component {
     return (
       //using video tag so no analytics get sent(except for usage i guess)
       <div>
-        <video autoPlay controls src={url}></video>
+        <video width="320" height="240" autoPlay controls src={url}></video>
         <Button onClick={closePlayer}>Close Player</Button>
       </div>
     )
