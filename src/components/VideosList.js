@@ -23,6 +23,7 @@ export default class VideosList extends Component {
       loading: true,
       preview: false,
       url: "",
+      preview_id: "",
       key: ""
     }
   }
@@ -36,7 +37,8 @@ export default class VideosList extends Component {
   handlePreview = id => {
     this.setState({
       preview: true,
-      url: `https://cdn.jwplayer.com/videos/${id}-${this.state.key}.mp4`
+      url: `https://cdn.jwplayer.com/videos/${id}-${this.state.key}.mp4`,
+      preview_id: id
     })
   }
 
@@ -68,10 +70,16 @@ export default class VideosList extends Component {
   }
 
   render() {
-    let { videos, view, loading, preview, url } = this.state
+    let { videos, view, loading, preview, url, preview_id } = this.state
     return (
       <div>
-        {preview && <Preview url={url} closePlayer={this.closePlayer} />}
+        {preview && (
+          <Preview
+            url={url}
+            preview_id={preview_id}
+            closePlayer={this.closePlayer}
+          />
+        )}
         <SearchBar searchResults={this.searchResults} />
         {!loading && (
           <Accordion>

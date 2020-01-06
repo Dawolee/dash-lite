@@ -116,7 +116,6 @@ export let fetchVideos = (
   })
     .then(res => res.json())
     .then(data => {
-      console.log("Management API response: ", data)
       callback(data.videos)
     })
     .catch(error => console.error("Error:", error))

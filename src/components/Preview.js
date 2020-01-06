@@ -6,14 +6,16 @@ export default class Preview extends Component {
     super(props)
     this.state = {}
   }
+
   componentDidMount() {}
 
   render() {
-    let { url, closePlayer } = this.props
+    let { url, closePlayer, preview_id } = this.props
     return (
       //using video tag so no analytics get sent(except for usage i guess)
-      <div>
-        <video width="320" height="240" autoPlay controls src={url}></video>
+      <div className="preview_div">
+        <p id="preview_id">Media ID: {preview_id} is playing</p>
+        <video width="100%" height="auto" autoPlay controls src={url}></video>
         <Button onClick={closePlayer}>Close Player</Button>
       </div>
     )

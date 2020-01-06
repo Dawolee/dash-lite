@@ -24,5 +24,17 @@ code {
 }
 
 .fetching-msg {
-  margin: 0% auto 0% auto;
+  text-align: center;
+  margin-top: 1%;
+}
+
+.preview_div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#preview_id {
+  text-align: center;
+  margin: 0;
 }
