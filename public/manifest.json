@@ -10,12 +10,13 @@
     "128": "./preview_imgs/128.png"
   },
   "browser_action": {
-    "default_icon": {          
-      "16": "./preview_imgs/16.png", 
-      "24": "./preview_imgs/24.png", 
-      "32": "./preview_imgs/32.png"  
+    "default_icon": {
+      "16": "./preview_imgs/16.png",
+      "24": "./preview_imgs/24.png",
+      "32": "./preview_imgs/32.png"
     },
-    "default_title": "Dash-Lite",      
-    "default_popup": "index.html"       
+    "default_title": "Dash-Lite",
+    "default_popup": "index.html",
+    "permissions": ["storage"]
   }
 }
